@@ -1,0 +1,32 @@
+﻿@using MvcBigBank.Models
+@model tbl_fatura
+
+@{
+    ViewBag.Title = "Başvuru Sonuç";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-lg-12">
+    <section class="panel" style="margin-left:40px; margin-top:90px">
+        <header class="panel-heading" style="text-align:center;">
+               Başvuru Sonucu
+        </header>
+        <div class="panel-body" style="text-align:center; vertical-align:middle; align-items:center; justify-content:center">
+            @using (Html.BeginForm("Resulto", "Credit", FormMethod.Post, new { @id = "frmResulto" }))
+            {
+                @Html.AntiForgeryToken()
+
+
+                <div class="form-group">
+                    <div>
+                        <label>Kredi Başvuru Sonucunuz </label>
+                        <div>
+                            <p>@ViewBag.value</p>
+                        </div>
+                    </div>
+
+                </div>
+            }
+        </div>
+    </section>
+</div>

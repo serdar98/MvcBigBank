@@ -1,0 +1,80 @@
+﻿@using MvcBigBank.Models
+@model IEnumerable<MvcBigBank.Models.Hesap>
+
+@{
+    ViewBag.Title = "Fatura Ödeme";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Views/Payment/StyleSheet1.css" rel="stylesheet" />
+@{
+    db_BankProjectEntities2 db = new db_BankProjectEntities2();
+    Musteri musteri = new Musteri();
+}
+<div class="col-lg-12">
+    <section class="panel">
+        <header class="panel-heading">
+
+            <h5>Faturanızı Ödemek İstediğiniz Hesabı Seçiniz</h5>
+        </header>
+        <div class="panel-body">
+            <table class="table">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.hesapNo)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ekNo)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.bakiye)
+                    </th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+
+                @foreach (var item in db.Musteri)
+                {
+                    if (item.tcKimlik == Session["LoginUser"].ToString())
+                    {
+                        musteri = item;
+                    }
+                }
+
+
+                @foreach (var item in db.Hesap)
+                {
+                    int temp = 0;
+                    temp = musteri.musteriID;
+                    if (item.musteriID == temp && item.aktiflik == true)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.hesapNo)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ekNo)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.bakiye)
+                            </td>
+                            <td>
+                                <a href="/Payment/PayingTheBill/@item.hesapID" class="btn btn-primary btn-xs ">Fatura Öde</a>
+                            </td>
+
+                        </tr>
+                    }
+                }
+
+            </table>
+        </div>
+    </section>
+    @if (ViewBag.Message != null)
+    {
+        <script type="text/javascript">
+                    window.onload = function () {
+                        alert("@ViewBag.Message")
+                    }
+        </script>
+    }
+</div>
