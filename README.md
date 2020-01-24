@@ -4,4 +4,5 @@ Bu proje sanal bir bankacalık uygulamasıdır.
 * Hesap Açma/Kapatma
 * Para Çekme/Yatırma
 * Havale/Virman 
-* Telefon Faturası Ödeme işlemleri yapılmaktadır
+* Telefon Faturası Ödeme
+* Kredi Tahmini işlemleri yapılmaktadır
